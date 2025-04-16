@@ -1,0 +1,837 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+int main()
+{
+    
+    cout << "------------------------------------------------------------------------" << endl;
+    cout << "         Pakistan Airline and Railway Management System   " << endl;
+    cout << "------------------------------------------------------------------------" << endl;
+    cout << endl;
+    cout << endl;
+
+
+    
+    string recentBooking[10];
+    int totalTicket = 0;
+    int recentIndex = 0;
+    int y= 0;
+    int recentPassIndex = 0;
+
+
+    //passenger info
+    int counter = 0, choice = 0;
+    string passName[10];
+    double passID[10];
+    int passAge[10];
+    string passContact[10];
+    int passTicktCount[10] = { 0,0,0,0,0,0,0,0,0,0 };
+
+    //Passenger Account
+    int passBalance[10] = { 0,0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    char accChoice = 0;
+    int deposite = 0;
+
+    //Mode of transport
+    int transportChoice = 0;
+
+    
+    //
+    //AirLines
+    string allFlightNumbers[6] = { "BWP-33","MUX-10","ISL-41","Mux-99","QET-48","KCH-12" };
+    string allFlightDestinations[6] = { "Bhawalpur","Multan","Islamabad","Multan","Quetta","Karachi" };
+    
+    int PIAseats[3] = {10,10,10};
+    int FlyJinnahSeats[3] = { 10,10,10 };
+    string PIA_Cities[3] = { "Bhawalpur","Multan","Islamabad" };
+    string FLY_J_Citites[3] = { "Multan","Quetta","Karachi" };
+    int PIA_Cost[3] = { 400,500,500 };
+    int FLY_J_Cost[3] = { 400,800,1000 };
+    string PIA_FlightNumbers[3] = { "BWP-33","MUX-10","ISL-41" };
+    string FLY_J_FlightNumbers[3] = { "Mux-99","QET-48","KCH-12" };
+    string PIA_Departure[3] = { "12:10","01:00","15:00" };
+    string FFLY_J_Departure[3] = { "15:30","14:50","9:00" };
+    int AirLineChoice = 0;
+    string AirlineDestination;
+   
+    //Railway
+    string allTrainNumbers[6] = {"MUL-4","FSD-7","PWR-1","RW-8","SR-9","BW-0"};
+    string allTrainDestinations[6] = { "Multan","Faisalabad","Peshawar","Rawalpindi","Sargodha ","Bhawalpur" };
+    int PakExpress_Seats[3] = { 15,15,15 };
+    int FastExpress_Seats[3] = { 10,10,10 };
+    string PakExpress_Cities[3] = { "Multan","Faisalabad","Peshawar" };
+    string FastExpress_Cities[3] = { "Rawalpindi","Sargodha ","Bhawalpur" };
+    int PakExpress_Cost[3] = { 200,300,400 };
+    int FastExpress_Cost[3] = { 300,200,300 };
+    string PakExpress_TrainNumber[3] = {"MUL-4","FSD-7","PWR-1"};
+    string FastExpress_TrainNumner[3] = { "RW-8","SR-9","BW-0" };
+    string PakExpress_Departure[3] = { "13:00","16:45","20:55" };
+    string FastExpress_Departure[3] = { "13:12","21:00","18:20" };
+    int TrainChoice = 0;
+    string TrainDestination;
+
+    char displayChoice = 'a';
+    //
+
+    
+
+    //PIA SPACE
+    int PIA_spaceCounter[3];
+    string x;
+    for (int i = 0; i < 3; i++) {
+        x = PIA_Cities[i];
+        int sp = 10;
+        int a = 0;
+        while (x[a] != '\0') {
+            a++;
+        }
+        PIA_spaceCounter[i] = sp - a;
+    }
+    string PIA_space[3];
+
+    for (int i = 0; i < 3; i++) {
+        for (int a = 0; a < PIA_spaceCounter[i]; a++) {
+            PIA_space[i] = PIA_space[i] + " ";
+        }
+    }
+
+    //FflJinnah SPACE
+    int FLY_J_spaceCounter[3];
+    string f;
+    for (int i = 0; i < 3; i++) {
+        x = FLY_J_Citites[i];
+        int sp = 10;
+        int a = 0;
+        while (x[a] != '\0') {
+            a++;
+        }
+        FLY_J_spaceCounter[i] = sp - a;
+    }
+    string FLY_J_Space[3];
+
+    for (int i = 0; i < 3; i++) {
+        for (int a = 0; a < FLY_J_spaceCounter[i]; a++) {
+            FLY_J_Space[i] = FLY_J_Space[i] + " ";
+        }
+    }
+    
+   
+
+    
+   
+
+    do {
+        cout << "Main Menu: " << endl;
+        cout << endl;
+        cout << "   Press 1: Display all Flights and Trains" << endl;
+        cout << "   Press 2: Add passenger record" << endl;
+        cout << "   Press 3: Book Tickets" << endl;
+        cout << "   Press 4: Cancel Tickets" << endl;
+        cout << "   Press 5: Search passenger record" << endl;
+        cout << "   Press 6: Filter Flights/Trains by destination or time" << endl;
+        cout << "   Press 7: Generate Report" << endl;
+        cout << "   Press 8: Exit" << endl;
+        cout << endl;
+        cout << "Enter your chocie: ";
+        cin >> choice;
+        cout << endl;
+
+        if (choice == 1) {
+            int i = 0;
+            int b = 0;
+            int j = 0;
+            int k = 0;
+
+            
+            cout << "Press A: Display all Flights" << endl;
+            cout << "Press B: Display all Trains" << endl;
+            cout << "Enter your choice: ";
+            cin >> displayChoice;
+
+            if (displayChoice == 'A' || displayChoice == 'a') {
+                while (i < 3) {
+                   if (i == 0) {
+                        cout << "**********************************************************************************" << endl;
+                        cout << "                        PAKISTAN INTERNATIONAL AIRLINES" << endl;
+                        cout << "**********************************************************************************" << endl;
+                        cout << endl;
+                        cout << "City\t  |" << "   Available Seats    |" << " Departure Time |" << " Flight Number |" << " Ticket Cost |" << endl;
+                        cout << "---------------------------------------------------------------------------------" << endl;
+                    }
+                    cout << PIA_Cities[i] << PIA_space[i]<<"|\t    " << PIAseats[i] << "\t\t |    " << PIA_Departure[i] << "\t  |    " << PIA_FlightNumbers[i]<<"\t  |     " << PIA_Cost[i] << "\t|" << endl;
+                    i++;
+
+                }
+                cout << endl;
+                if (i > 2) {
+                    while (b < 3) {
+                        if (b == 0) {
+                            cout << "**********************************************************************************" << endl;
+                            cout << "                               FLY JINNAH" << endl;
+                            cout << "**********************************************************************************" << endl;
+                            cout << endl;
+                            cout << "City\t  |" << "   Available Seats    |" << " Departure Time |" << " Flight Number |" << " Ticket Cost |" << endl;
+                            cout << "---------------------------------------------------------------------------------" << endl;
+                        }
+                        cout << FLY_J_Citites[b] <<FLY_J_Space[b]<< "|\t    " << FlyJinnahSeats[b] << "\t\t |    " << FFLY_J_Departure[b] << "\t  |    " << FLY_J_FlightNumbers[b] << "\t  |     " << FLY_J_Cost[b] << "\t|" << endl;
+                        b++;
+
+                    }
+                }
+            }
+            else if (displayChoice == 'B' || displayChoice == 'b') {
+
+                while (j < 3) {
+                    if (j == 0) {
+                        cout << "**********************************************************************************" << endl;
+                        cout << "                               Pakistan Express" << endl;
+                        cout << "**********************************************************************************" << endl;
+                        cout << endl;
+                        cout << "City\t  |" << "   Available Seats    |" << " Departure Time |" << " Train Number |" << " Ticket Cost |" << endl;
+                        cout << "---------------------------------------------------------------------------------" << endl;
+
+                    }
+                    cout << PakExpress_Cities[j] << " |\t    " << PakExpress_Seats[j] << "\t\t |    " << PakExpress_Departure[j] << "\t  |    " << PakExpress_TrainNumber[j] << "\t  |     " << PakExpress_Cost[b] << "\t|" << endl;
+                    j++;
+
+                }
+                if (j > 2) {
+                    while (k < 3) {
+                        if (k == 0) {
+                            cout << "**********************************************************************************" << endl;
+                            cout << "                               Fast Express" << endl;
+                            cout << "**********************************************************************************" << endl;
+                            cout << endl;
+                            cout << "City\t  |" << "   Available Seats    |" << " Departure Time |" << " Train Number |" << " Ticket Cost |" << endl;
+                            cout << "---------------------------------------------------------------------------------" << endl;
+
+                        }
+                        cout << FastExpress_Cities[k] << " |\t    " << FastExpress_Seats[k] << "\t\t |    " << FastExpress_Departure[k] << "\t  |    " << FastExpress_TrainNumner[k] << "\t  |     " << FastExpress_Cost[k] << "\t|" << endl;
+                        k++;
+                    }
+                }
+
+
+
+            }
+            else {
+                cout << "Invalid Input";
+                break;
+            }
+            
+        }
+
+
+        if (choice == 2||choice==3) {
+            if (counter < 10) {
+
+                cout << "Enter your age: ";
+                cin >> passAge[counter];
+                cin.ignore();
+                if (passAge[counter] >= 18) {
+                    cout << "Enter your name: ";
+                    getline(cin,passName[counter]);
+                    cout << "Enter your CNIC or Passport Number: ";
+                    cin >> passID[counter];
+                    cout << "Enter your Contact Number: ";
+                    cin >> passContact[counter];
+                    cout << "Passenger record added successfully" << endl;
+                    cout << endl;
+
+
+                    do {
+                        cout << "Press 1: Book Airline Tickets" << endl;
+                        cout << "Press 2: Book Train Tickets" << endl;
+                        cout << "Press 3: Exist" << endl;
+                        cout << "Enter your choice: ";
+                        cin >> transportChoice;
+                        if (transportChoice == 1) {
+                            cout << "Press 1: Pakistan International Airlines" << endl;
+                            cout << "Press 2: Fly Jinnah" << endl;
+                            cout << "Enter your choice: ";
+                            cin >> AirLineChoice;
+
+                            if (AirLineChoice == 1) {
+                                int i = 0;
+                                while (i < 3) {
+                                    if (i == 0) {
+                                        cout << "**********************************************************************************" << endl;
+                                        cout << "                        PAKISTAN INTERNATIONAL AIRLINES" << endl;
+                                        cout << "**********************************************************************************" << endl;
+                                        cout << endl;
+                                        cout << "City\t  |" << "   Available Seats    |" << " Departure Time |" << " Flight Number |" << " Ticket Cost |" << endl;
+                                        cout << "---------------------------------------------------------------------------------" << endl;
+                                    }
+                                    cout << PIA_Cities[i] << PIA_space[i] << "|\t    " << PIAseats[i] << "\t\t |    " << PIA_Departure[i] << "\t  |    " << PIA_FlightNumbers[i] << "\t  |     " << PIA_Cost[i] << "\t|" << endl;
+                                    i++;
+
+                                }
+                                cout << "Enter your Destintation: ";
+                                cin >> AirlineDestination;
+
+                                bool destintationFound = false;
+                                int index = 0;
+                                int amount = 0;
+                                int tickets = 0;
+                                for (int z = 0; z < 3; z++) {
+                                    if (PIA_Cities[z] == AirlineDestination) {
+                                        destintationFound = true;
+                                        index = z;
+                                        break;
+                                    }
+                                }
+                                if (destintationFound == true) {
+                                    cout << "Ticket Price: " << PIA_Cost[index] << endl;
+                                    cout << "Enter number of tickets you want to buy: ";
+                                    cin >> tickets;
+                                    if (tickets <= 5) {
+                                        if (PIAseats[index] > tickets) {
+                                            cout << "Total Cost of tickets: " << PIA_Cost[index] * tickets << endl;
+
+                                            while (passBalance[counter] <= PIA_Cost[index] * tickets) {
+                                                cout << "Current Balnce: " << passBalance[counter] << endl;
+                                                cout << "Enter deposite amount: ";
+                                                cin >> amount;
+                                                passBalance[counter] = passBalance[counter] + amount;
+
+                                            }
+                                            cout << endl;
+                                            cout << "Ticket Booking Successful" << endl;
+                                            cout << endl;
+                                            cout << "Ticket Details: " << endl;
+                                            cout << "Name: " << passName[counter] << endl;
+                                            cout << "Contact: " << passContact[counter] << endl;
+                                            cout << "Destination: " << " Lahore-" << PIA_Cities[index] << endl;
+                                            cout << "Departure Time: " << PIA_Departure[index] << endl;
+                                            cout << "Flight Number: " << PIA_FlightNumbers[index] << endl;
+                                            PIAseats[index] = PIAseats[index] - tickets;
+                                            recentBooking[y] = PIA_FlightNumbers[index];
+                                            y++;
+                                            recentIndex = index;
+                                            break;
+                                        }
+                                        else {
+                                            cout << "Not enough tickets available";
+                                            break;
+                                        }
+                                    }
+                                    else {
+                                        cout << "Max 5 tickets allowed";
+                                        break;
+                                    }
+                                }
+                                else {
+                                    cout << "Invalid Input or Destination not found";
+                                    break;
+                                }
+                            }
+                            if (AirLineChoice == 2) {
+                                int i = 0;
+                                while (i < 3) {
+                                    if (i == 0) {
+                                        cout << "**********************************************************************************" << endl;
+                                        cout << "                               FLY JINNAH" << endl;
+                                        cout << "**********************************************************************************" << endl;
+                                        cout << endl;
+                                        cout << "City\t  |" << "   Available Seats    |" << " Departure Time |" << " Flight Number |" << " Ticket Cost |" << endl;
+                                        cout << "---------------------------------------------------------------------------------" << endl;
+                                    }
+                                    cout << FLY_J_Citites[i] << FLY_J_Space[i] << "|\t    " << FlyJinnahSeats[i] << "\t\t |    " << FFLY_J_Departure[i] << "\t  |    " << FLY_J_FlightNumbers[i] << "\t  |     " << FLY_J_Cost[i] << "\t|" << endl;
+                                    i++;
+
+                                }
+                                cout << "Enter your Destintation: ";
+                                cin >> AirlineDestination;
+
+                                int destintationFound = false;
+                                int index = 0;
+                                int amount = 0;
+                                int tickets = 0;
+                                for (int z = 0; z < 3; z++) {
+                                    if (FLY_J_Citites[z] == AirlineDestination) {
+                                        destintationFound = true;
+                                        index = z;
+                                        break;
+                                    }
+                                }
+                                if (destintationFound == true) {
+                                    cout << "Ticket Price: " << FLY_J_Cost[index] << endl;
+                                    cout << "Enter number of tickets you want to buy: ";
+                                    cin >> tickets;
+                                    if (tickets <= 5) {
+                                        if (FlyJinnahSeats[index] > tickets) {
+                                            cout << "Total Cost of tickets: " << FLY_J_Cost[index] * tickets << endl;
+
+                                            while (passBalance[counter] <= FLY_J_Cost[index] * tickets) {
+                                                cout << "Current Balnce: " << passBalance[counter] << endl;
+                                                cout << "Enter deposite amount: ";
+                                                cin >> amount;
+                                                passBalance[counter] = passBalance[counter] + amount;
+
+                                            }
+                                            cout << endl;
+                                            cout << "Ticket Booking Successful" << endl;
+                                            cout << endl;
+                                            cout << "Ticket Details: " << endl;
+                                            cout << "Name: " << passName[counter] << endl;
+                                            cout << "Contact: " << passContact[counter] << endl;
+                                            cout << "Destination: " << " Lahore-" << FLY_J_Citites[index] << endl;
+                                            cout << "Departure Time: " << FFLY_J_Departure[index] << endl;
+                                            cout << "Flight Number: " << FLY_J_FlightNumbers[index] << endl;
+                                            FlyJinnahSeats[index] = FlyJinnahSeats[index] - tickets;
+                                            recentBooking[y] = FLY_J_FlightNumbers[index];
+                                            y++;
+                                            recentIndex = index;
+                                            break;
+                                        }
+                                        else {
+                                            cout << "Not enough tickets available";
+                                            break;
+                                        }
+                                    }
+                                    else {
+                                        cout << "Max 5 tickets allowed";
+                                        break;
+                                    }
+                                }
+                                else {
+                                    cout << "Invalid Input or Destination not found";
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (transportChoice == 2) {
+                            cout << "Press 1: Pakistan Express" << endl;
+                            cout << "Press 2: Fast Expres" << endl;
+                            cout << "Enter your choice: ";
+                            cin >> TrainChoice;
+                            if (TrainChoice == 1) {
+                                int j = 0;
+                                while (j < 3) {
+                                    if (j == 0) {
+                                        cout << "**********************************************************************************" << endl;
+                                        cout << "                               Pakistan Express" << endl;
+                                        cout << "**********************************************************************************" << endl;
+                                        cout << endl;
+                                        cout << "City\t  |" << "   Available Seats    |" << " Departure Time |" << " Train Number |" << " Ticket Cost |" << endl;
+                                        cout << "---------------------------------------------------------------------------------" << endl;
+
+                                    }
+                                    cout << PakExpress_Cities[j] << " |\t    " << PakExpress_Seats[j] << "\t\t |    " << PakExpress_Departure[j] << "\t  |    " << PakExpress_TrainNumber[j] << "\t  |     " << PakExpress_Cost[j] << "\t|" << endl;
+                                    j++;
+
+                                }
+                                cout << "Enter your Destintation: ";
+                                cin >> TrainDestination;
+
+                                int destintationFound = false;
+                                int index = 0;
+                                int amount = 0;
+                                int tickets = 0;
+                                for (int z = 0; z < 3; z++) {
+                                    if (PakExpress_Cities[z] == TrainDestination) {
+                                        destintationFound = true;
+                                        index = z;
+                                        break;
+                                    }
+                                }
+                                if (destintationFound == true) {
+                                    cout << "Ticket Price: " << PakExpress_Cost[index] << endl;
+                                    cout << "Enter number of tickets you want to buy: ";
+                                    cin >> tickets;
+                                    if (tickets <= 5) {
+                                        if (PakExpress_Seats[index] > tickets) {
+                                            cout << "Total Cost of tickets: " << PakExpress_Cost[index] * tickets << endl;
+
+                                            while (passBalance[counter] <= PakExpress_Cost[index] * tickets) {
+                                                cout << "Current Balnce: " << passBalance[counter] << endl;
+                                                cout << "Enter deposite amount: ";
+                                                cin >> amount;
+                                                passBalance[counter] = passBalance[counter] + amount;
+
+                                            }
+                                            cout << endl;
+                                            cout << "Ticket Booking Successful" << endl;
+                                            cout << endl;
+                                            cout << "Ticket Details: " << endl;
+                                            cout << "Name: " << passName[counter] << endl;
+                                            cout << "Contact: " << passContact[counter] << endl;
+                                            cout << "Destination: " << " Lahore-" << PakExpress_Cities[index] << endl;
+                                            cout << "Departure Time: " << PakExpress_Departure[index] << endl;
+                                            cout << "Train Number: " << PakExpress_TrainNumber[index] << endl;
+                                            PakExpress_Seats[index] = PakExpress_Seats[index] - tickets;
+                                            recentBooking[y] = PakExpress_TrainNumber[index];
+                                            y++;
+                                            recentIndex = index;
+                                            break;
+                                        }
+                                        else {
+                                            cout << "Not enough tickets available";
+                                            break;
+                                        }
+                                    }
+                                    else {
+                                        cout << "Max 5 tickets allowed";
+                                        break;
+                                    }
+                                }
+                                else {
+                                    cout << "Invalid Input or Destination not found";
+                                    break;
+                                }
+                            }
+                            if (TrainChoice == 2) {
+
+                                int k = 0;
+                                while (k < 3) {
+                                    if (k == 0) {
+                                        cout << "**********************************************************************************" << endl;
+                                        cout << "                               Fast Express" << endl;
+                                        cout << "**********************************************************************************" << endl;
+                                        cout << endl;
+                                        cout << "City\t  |" << "   Available Seats    |" << " Departure Time |" << " Train Number |" << " Ticket Cost |" << endl;
+                                        cout << "---------------------------------------------------------------------------------" << endl;
+
+                                    }
+                                    cout << FastExpress_Cities[k] << " |\t    " << FastExpress_Seats[k] << "\t\t |    " << FastExpress_Departure[k] << "\t  |    " << FastExpress_TrainNumner[k] << "\t  |     " << FastExpress_Cost[k] << "\t|" << endl;
+                                    k++;
+
+                                }
+                                cout << "Enter your Destintation: ";
+                                cin >> TrainDestination;
+
+                                int destintationFound = false;
+                                int index = 0;
+                                int amount = 0;
+                                int tickets = 0;
+                                for (int z = 0; z < 3; z++) {
+                                    if (FastExpress_Cities[z] == TrainDestination) {
+                                        destintationFound = true;
+                                        index = z;
+                                        break;
+                                    }
+                                }
+                                if (destintationFound == true) {
+                                    cout << "Ticket Price: " << FastExpress_Cost[index] << endl;
+                                    cout << "Enter number of tickets you want to buy: ";
+                                    cin >> tickets;
+                                    if (tickets <= 5) {
+                                        if (FastExpress_Seats[index] > tickets) {
+                                            cout << "Total Cost of tickets: " << FastExpress_Cost[index] * tickets << endl;
+
+                                            while (passBalance[counter] <= FastExpress_Cost[index] * tickets) {
+                                                cout << "Current Balnce: " << passBalance[counter] << endl;
+                                                cout << "Enter deposite amount: ";
+                                                cin >> amount;
+                                                passBalance[counter] = passBalance[counter] + amount;
+
+                                            }
+                                            cout << endl;
+                                            cout << "Ticket Booking Successful" << endl;
+                                            cout << endl;
+                                            cout << "Ticket Details: " << endl;
+                                            cout << "Name: " << passName[counter] << endl;
+                                            cout << "Contact: " << passContact[counter] << endl;
+                                            cout << "Destination: " << " Lahore-" << FastExpress_Cities[index] << endl;
+                                            cout << "Departure Time: " << FastExpress_Departure[index] << endl;
+                                            cout << "Train Number: " << FastExpress_TrainNumner[index] << endl;
+                                            FastExpress_Seats[index] =FastExpress_Seats[index] - tickets;
+                                            recentBooking[y] = FastExpress_TrainNumner[index];
+                                            y++;
+                                            recentIndex = index;
+                                            break;
+                                        }
+                                        else {
+                                            cout << "Not enough tickets available";
+                                            break;
+                                        }
+                                    }
+                                    else {
+                                        cout << "Max 5 tickets allowed";
+                                        break;
+                                    }
+                                }
+                                else {
+                                    cout << "Invalid Input or Destination not found";
+                                    break;
+                                }
+                               
+                            }
+
+
+
+                        }
+
+
+                    } while (transportChoice != 3);
+
+
+                    counter++;
+
+                
+                }
+                else {
+                    cout << "You are under aged";
+                    break;
+                }
+
+            }
+            else {
+                cout << "Only 10 Passenger records can be stored";
+                break;
+            }
+        }
+    
+        if (choice == 4) {
+            if (counter == 0) {
+                cout << "No Tickets Booked" << endl;
+            }
+            else {
+                
+
+                for (int i = 0; i < y; i++) {
+                    string ticketToCancel = recentBooking[i];
+
+                    
+                    for (int j = 0; j < 3; j++) {
+                        if (ticketToCancel == PIA_FlightNumbers[j]) {
+                            cout << "Your Ticket: " << ticketToCancel << " has been cancelled." << endl;
+                            PIAseats[j] = 10; 
+                        }
+                        else if (ticketToCancel == FLY_J_FlightNumbers[j]) {
+                            cout << "Your Ticket: " << ticketToCancel << " has been cancelled." << endl;
+                            FlyJinnahSeats[j]=10; 
+                        }
+                    }
+
+                    
+                    for (int j = 0; j < 3; j++) {
+                        if (ticketToCancel == PakExpress_TrainNumber[j]) {
+                            cout << "Your Ticket: " << ticketToCancel << " has been cancelled." << endl;
+                            PakExpress_Seats[j]=10; 
+                        }
+                        else if (ticketToCancel == FastExpress_TrainNumner[j]) {
+                            cout << "Your Ticket: " << ticketToCancel << " has been cancelled." << endl;
+                            FastExpress_Seats[j] = 10;
+                        }
+                    }
+                }
+
+               
+                y = 0;
+                cout << "All recent tickets have been cancelled." << endl;
+            }
+        }
+
+        if (choice == 5) {
+            int id = 0;
+            int a = 0;
+            if (counter == 0) {
+                cout << "No record stored" << endl;
+            }
+            else {
+                cout << "Enter Passenger CNIC or Passport Number: ";
+                cin >> id;
+                for (int i = 0; i < 10; i++) {
+                    if (passID[i] == id) {
+                        a = i;
+                        break;
+                    }
+                }
+                cout << "Name: " << passName[a] << endl;
+                cout << "Recent Booking: " << recentBooking << endl;
+            }
+        }
+        if (choice == 6) {
+
+            int FilterChoice = 0;
+            int transportMode = 0;
+            cout << "Press 1: Filter Flights" << endl;
+            cout << "Press 2: Filter Trains" << endl;
+            cout << "Enter your choice: ";
+            cin >> transportMode;
+
+            if (transportMode == 1) {
+                cout << "Press 1: Filter by time" << endl;
+                cout << "Press 2: Filter by destination" << endl;
+                cout << "Enter your choice: ";
+                cin >> FilterChoice;
+
+                if (FilterChoice == 1) {
+                    string time;
+                    int FJ = 0;
+                    int PIA = 0;
+                    cout << "Enter time in 24 hour format: ";
+                    cin >> time;
+                    cout << endl;
+
+                    for (int i = 0; i < 3; i++) {
+                        string x;
+                        string b;
+                        x = PIA_Departure[i];
+                        b = b + x[0] + x[1];
+                        cout << endl;
+                        if (b==time) {
+                            cout << "PIA: " << "Lahore-" << PIA_Cities[i] << " | Cost: " << PIA_Cost[i] << endl;
+                            PIA++;
+                        }
+                    }
+                    for (int i = 0; i < 3; i++) {
+                        string x;
+                        string b;
+                        
+                        x = FFLY_J_Departure[i];
+                        b = b + x[0] + x[1];
+                        cout << endl;
+                        if (b == time) {
+                            cout << "Fly Jinnah: " << "Lahore-" << FLY_J_Citites[i] << " | Cost: " << FLY_J_Cost[i] << endl;
+                            FJ++;
+                        }
+                       
+                    }
+                    if (FJ==0) {
+                        cout << "No Fly Jinnah flights available" << endl;
+                    }
+                    if (PIA == 0) {
+                        cout << "No PIA flights available" << endl;
+                    }
+                    
+                }
+                if (FilterChoice == 2) {
+                    string dest;
+                    int PIA = 0;
+                    int FJ = 0;
+                    cout << "Enter your destination: ";
+                    cin >> dest;
+                    cout << endl;
+
+                    for (int i = 0; i < 3; i++) {
+                        string x;
+                        x = PIA_Cities[i];
+                        if (x == dest) {
+                            cout << "PIA: " << "Lahore-" << PIA_Cities[i] << " | Cost: " << PIA_Cost[i] << endl;
+                            PIA++;
+                        }
+                    }
+                    for (int i = 0; i < 3; i++) {
+                        string x;
+                        x = FLY_J_Citites[i];
+                        if (x == dest) {
+                            cout << "Fly Jinnah: " << "Lahore-" <<FLY_J_Citites[i] << " | Cost: " <<    FLY_J_Cost[i] << endl;
+                            FJ++;
+                        }
+                    }
+
+                    if (PIA == 0) {
+                        cout << "No PIA flights available" << endl;
+                    }
+                    if (FJ == 0) {
+                        cout << "No Fly Jinnah flights available" << endl;
+                    }
+                }
+                else {
+                    cout << "Invalid Input"<<endl;
+                }
+
+            }
+            if (transportMode == 2) {
+
+                cout << "Press 1: Filter by time" << endl;
+                cout << "Press 2: Filter by destination" << endl;
+                cout << "Enter your choice: ";
+                cin >> FilterChoice;
+
+                if (FilterChoice == 1) {
+                    string time;
+                    int Pak = 0;
+                    int Fast = 0;
+                    cout << "Enter time in 24 hour format: ";
+                    cin >> time;
+                    cout << endl;
+
+                    for (int i = 0; i < 3; i++) {
+                        string x;
+                        string b;
+                        x = PakExpress_Departure[i];
+                        b = b + x[0] + x[1];
+                        cout << endl;
+                        if (b == time) {
+                            cout << "Pakistan Express: " << "Lahore-" << PakExpress_Cities[i] << " | Cost: " << PakExpress_Cost[i] << endl;
+                            Pak++;
+                        }
+                    }
+                    for (int i = 0; i < 3; i++) {
+                        string x;
+                        string b;
+
+                        x = FastExpress_Departure[i];
+                        b = b + x[0] + x[1];
+                        cout << endl;
+                        if (b == time) {
+                            cout << "Fast Express: " << "Lahore-" << FastExpress_Cities[i] << " | Cost: " << FastExpress_Cost[i] << endl;
+                            Fast++;
+                        }
+
+                    }
+                    if (Pak == 0) {
+                        cout << "No Pakistan Express trains available" << endl;
+                    }
+                    if (Fast == 0) {
+                        cout << "No Fast Express trains available" << endl;
+                    }
+
+                }
+                if (FilterChoice == 2) {
+                    string dest;
+                    int Pak = 0;
+                    int Fast = 0;
+                    cout << "Enter your destination: ";
+                    cin >> dest;
+                    cout << endl;
+
+                    for (int i = 0; i < 3; i++) {
+                        string x;
+                        x = PakExpress_Cities[i];
+                        if (x == dest) {
+                            cout << "Pakistan Express: " << "Lahore-" << PakExpress_Cities[i] << " | Cost: " << PakExpress_Cost[i] << endl;
+                            Pak++;
+                        }
+                    }
+                    for (int i = 0; i < 3; i++) {
+                        string x;
+                        x = FastExpress_Cities[i];
+                        if (x == dest) {
+                            cout << "Fast Express: " << "Lahore-" << FastExpress_Cities[i] << " | Cost: " << FastExpress_Cost[i] << endl;
+                            Fast++;
+                        }
+                    }
+
+                    if (Pak == 0) {
+                        cout << "No Pakistan Express trains available" << endl;
+                    }
+                    if (Fast == 0) {
+                        cout << "No Fast Express trains available" << endl;
+                    }
+                }
+                else {
+                    cout << "Invalid Input" << endl;
+                }
+
+            }
+        }
+           
+        if (choice == 7) {
+            for (int i = 0; i < counter; i++) {
+                cout << passName[i] << " : " << recentBooking[i] << endl;
+            }
+        }
+
+
+    } while (choice != 8);
+
+   
+
+}
